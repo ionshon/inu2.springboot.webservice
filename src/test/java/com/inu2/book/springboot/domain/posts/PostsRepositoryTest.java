@@ -13,7 +13,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest // H2 테이터베이스 자동 실행
 public class PostsRepositoryTest {
 
     @Autowired
@@ -30,14 +30,14 @@ public class PostsRepositoryTest {
         String title = "테스트 게시글";
         String content = "테스트 본문";
 
-        postsRepository.save(Posts.builder()
+        postsRepository.save(Posts.builder() // 테이블 posts에 insert/update 쿼리 실행
                 .title(title)
                 .content(content)
                 .author("inushongg@gmail.com")
                 .build());
 
         //when
-        List<Posts> postsList = postsRepository.findAll();
+        List<Posts> postsList = postsRepository.findAll(); //posts에 있는 모든 데이터 조회
 
         //then
         Posts posts = postsList.get(0);
